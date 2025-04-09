@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>1001 Libraries - Home</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta lang="en">
+        <style>
+            @font-face {
+                font-family: "Slopes";
+                src: url("/static/fonts/slopes.ttf") format("truetype"); /* Added format declaration */
+            }
+
+            body {
+                font-family: 'Slopes', sans-serif; /* Added fallback font */
+            }
+
+            /* Styles for the top menu bar */
+            .top-menu {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 25px 25px;
+                background: linear-gradient(to right, #FFF7AD, #FFA9F9); /* Gradient color */
+                color: white;
+                margin: 0;
+                position: fixed; /* Stick to the top */
+                top: 0;
+                left: 0;
+                right: 0;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Added shadow */
+                z-index: 1000; /* Ensure the menu bar is always on top */
+                transition: margin 0.5s cubic-bezier(0.22, 1, 0.36, 1.55), border-radius 0.5s cubic-bezier(0.22, 1, 0.36, 1.55); /* Overshoot only at the end */
+            }
+
+            .top-menu.scrolled {
+                margin: 10px 20px; /* Detach from edges */
+                border-radius: 10px; /* Optional: rounded corners */
+            }
+
+            .logo {
+                display: flex;
+                align-items: center;
+                color: #000000;
+                font-weight: bold;
+                font-size: 35px;
+            }
+
+            .logo img {
+                height: 40px;
+                margin-right: 10px;
+            }
+
+            .menu-links {
+                display: flex;
+                gap: 25px; /* Increased gap for more space */
+                font-size: 20px;
+            }
+
+            .menu-links a {
+                text-decoration: none;
+                color: #000000;
+                position: relative;
+            }
+
+            .menu-links a:not(:last-child)::after {
+                content: '';
+                position: absolute;
+                right: -12.5px; /* Centered within the increased gap */
+                top: 0;
+                height: 100%;
+                width: 2px; /* Increased width for bold effect */
+                background-color: #000000; /* Separator color */
+            }
+
+            .menu-links a:hover {
+                text-decoration: underline;
+            }
+
+            .footerDiv {
+                background-image: linear-gradient(135deg, #FFA9F9, #FFF7AD); /* Footer color */
+                margin-top: 50px; /* Add spacing above the footer */
+                margin-bottom: 50px; /* Add spacing below the footer */
+                padding: 15px;
+                display: flex; /* Align items in a row */
+                justify-content: space-between; /* Space between elements */
+                align-items: center; /* Center vertically */
+            }
+
+            .footerDiv p {
+                font-size: 25px;
+                color: #636363;
+                margin: 0; /* Remove default margin */
+            }
+
+            .footerDiv h1 {
+                font-size: 25px;
+                color: #636363;
+                font-weight: normal;
+                margin: 0; /* Remove default margin */
+            }
+        </style>
+    </head>
+    <body>
+        <div class="top-menu">
+            <div class="logo">
+                <img src="/static/resources/logo.jpg" alt="1001 Libraries Logo"> <!-- Replace with your logo file -->
+                <span>1001 Libraries</span>
+            </div>
+            <div class="menu-links">
+                <a href="/">Home</a>
+                <a href="/about">About Us</a>
+                <a href="/libraries">Libraries</a>
+                <a href="/events">Events</a>
+                <a href="/join">Join Us</a>
+            </div>
+        </div>
+        <script>
+            document.addEventListener('scroll', function () {
+                const topMenu = document.querySelector('.top-menu');
+                if (window.scrollY > 0) {
+                    topMenu.classList.add('scrolled');
+                } else {
+                    topMenu.classList.remove('scrolled');
+                }
+            });
+        </script>
+        <div class="footerDiv">
+            <p>Contact: xxxxxx for any questions or concerns</p>
+            <h1>All rights reserved</h1>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>1001 Libraries - Home</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta lang="en">
+        <style>
+            @font-face {
+                font-family: "Slopes";
+                src: url("/static/fonts/slopes.ttf") format("truetype"); /* Added format declaration */
+            }
+
+            @font-face {
+                font-family: "Typewriter";
+                src: url("/static/fonts/typewriter.ttf") format("truetype"); /* Added format declaration */
+            }
+
+            body {
+                font-family: 'Slopes', sans-serif; /* Added fallback font */
+            }
+
+            /* Styles for the top menu bar */
+            .top-menu {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 25px 25px;
+                background: linear-gradient(to right, #FFF7AD, #FFA9F9); /* Gradient color */
+                color: white;
+                margin: 0;
+                position: fixed; /* Stick to the top */
+                top: 0;
+                left: 0;
+                right: 0;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Added shadow */
+                z-index: 1000; /* Ensure the menu bar is always on top */
+                transition: margin 0.5s cubic-bezier(0.22, 1, 0.36, 1.55), border-radius 0.5s cubic-bezier(0.22, 1, 0.36, 1.55); /* Overshoot only at the end */
+            }
+
+            .top-menu.scrolled {
+                margin: 10px 20px; /* Detach from edges */
+                border-radius: 10px; /* Optional: rounded corners */
+            }
+
+            .logo {
+                display: flex;
+                align-items: center;
+                color: #000000;
+                font-weight: bold;
+                font-size: 35px;
+            }
+
+            .logo img {
+                height: 40px;
+                margin-right: 10px;
+            }
+
+            .menu-links {
+                display: flex;
+                gap: 25px; /* Increased gap for more space */
+                font-size: 20px;
+            }
+
+            .menu-links a {
+                text-decoration: none;
+                color: #000000;
+                position: relative;
+            }
+
+            .menu-links a:not(:last-child)::after {
+                content: '';
+                position: absolute;
+                right: -12.5px; /* Centered within the increased gap */
+                top: 0;
+                height: 100%;
+                width: 2px; /* Increased width for bold effect */
+                background-color: #000000; /* Separator color */
+            }
+
+            .menu-links a:hover {
+                text-decoration: underline;
+            }
+
+            .library-theme-video {
+                position: relative;
+                width: 100%;
+                height: 400px; /* Adjust height as needed */
+                overflow: hidden;
+                margin-top: 100px; /* Keep top margin for separation */
+            }
+
+            .library-theme-video video {
+                width: 100%; /* Ensure the video stretches the entire width */
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .overlay-box {
+                position: absolute;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent background */
+                padding: 20px;
+                text-align: center;
+                border-radius: 10px; /* Optional: rounded corners */
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
+            }
+
+            .overlay-box h1 {
+                margin: 0;
+                font-size: 41.2px;
+                color: #000000;
+                font-family: 'Typewriter', sans-serif; /* Use the typewriter font */
+                white-space: nowrap; /* Prevent wrapping */
+                overflow: hidden; /* Hide overflowing text */
+                border-right: 2px solid #000; /* Add a blinking cursor effect */
+                animation: typing 4s steps(30, end), blink 0.5s step-end infinite; /* Typing and blinking effects */
+            }
+
+            @keyframes typing {
+                from {
+                    width: 0;
+                }
+                to {
+                    width: 100%;
+                }
+            }
+
+            @keyframes blink {
+                from, to {
+                    border-color: transparent;
+                }
+                50% {
+                    border-color: #000;
+                }
+            }
+
+            .map-counter-container {
+                display: none; /* Hide the original container */
+            }
+
+            .map-counter-card {
+                display: flex;
+                flex-direction: row; /* Arrange items in a row */
+                align-items: center;
+                justify-content: space-between;
+                background: linear-gradient(135deg, #FFA9F9, #FFF7AD); /* Gradient background */
+                border-radius: 15px; /* Rounded corners */
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+                padding: 20px;
+                margin: 50px 20px; /* Add spacing around the card */
+                position: relative; /* For geometric shapes */
+                overflow: hidden; /* Ensure content respects border radius */
+                opacity: 0; /* Initially hidden */
+                transform: translateY(20px); /* Slide in from below */
+                transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Smooth animation */
+            }
+
+            .map-counter-card.visible {
+                opacity: 1; /* Fully visible */
+                transform: translateY(0); /* Reset position */
+            }
+
+            .map-counter-card::before,
+            .map-counter-card::after {
+                content: '';
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.3); /* Semi-transparent circles */
+                z-index: 0;
+            }
+
+            .map-counter-card::before {
+                width: 200px;
+                height: 200px;
+                top: -50px;
+                left: -50px;
+            }
+
+            .map-counter-card::after {
+                width: 250px;
+                height: 250px;
+                bottom: -70px;
+                right: -70px;
+            }
+
+            .map-counter-card .google-map {
+                flex: 1;
+                height: 400px; /* Adjust height as needed */
+                margin-right: 20px; /* Space between map and counter */
+                border: 1px solid #ccc; /* Optional: border for the map */
+                border-radius: 15px; /* Rounded corners */
+                overflow: hidden; /* Ensure content respects border radius */
+                transform: translateX(-100px); /* Slide in from the left */
+                transition: transform 0.5s ease-out; /* Smooth animation */
+                z-index: 1; /* Above background shapes */
+            }
+
+            .map-counter-card .google-map.visible {
+                transform: translateX(0); /* Reset position */
+            }
+
+            .map-counter-card .counter {
+                flex: 0.5;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                font-family: 'Slopes', sans-serif; /* Use the typewriter font */
+                font-size: 45px;
+                color: #000000;
+                text-align: center;
+                transform: translateX(100px); /* Slide in from the right */
+                transition: transform 0.5s ease-out; /* Smooth animation */
+                z-index: 1; /* Above background shapes */
+            }
+
+            .map-counter-card .counter.visible {
+                transform: translateX(0); /* Reset position */
+            }
+
+            .map-counter-card .counter-number {
+                font-size: 48px;
+                font-weight: bold;
+                color: #f9b12f; /* Updated color */
+            }
+
+            .scroll-indicator {
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 16px;
+                color: #000000;
+                background-color: rgba(255, 255, 255, 0.8);
+                padding: 10px 20px;
+                border-radius: 20px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+                opacity: 1;
+                transition: opacity 0.3s ease-out;
+                font-size: 30px;
+            }
+
+            .scroll-indicator.hidden {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            .library-built-placeholder {
+                text-align: center;
+                font-size: 80px;
+                color: #888888;
+                margin: 50px 0;
+                opacity: 1;
+                transition: opacity 0.5s ease-out;
+            }
+
+            .library-built-placeholder.hidden {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            .description {
+                margin: 30px 20px;
+                text-align: center;
+                font-size: 35px; /* Increased font size */
+                color: #555555;
+            }
+
+            .description p {
+                opacity: 0; /* Initially hidden */
+                transform: translateY(-20px); /* Slide in from above */
+                transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Smooth animation */
+            }
+
+            .description p.visible {
+                opacity: 1; /* Fully visible */
+                transform: translateY(0); /* Reset position */
+            }
+
+            .down-arrow {
+                text-align: center;
+                font-size: 40px;
+                color: #a17d60;
+                margin-top: 20px;
+                opacity: 0; /* Initially hidden */
+                transform: translateY(-20px); /* Slide in from above */
+                transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Smooth animation */
+                animation: floatArrow 3s infinite ease-in-out; /* Add floating animation */
+            }
+
+            .down-arrow.visible {
+                opacity: 1; /* Fully visible */
+                transform: translateY(0); /* Reset position */
+            }
+
+            @keyframes floatArrow {
+                0% {
+                    transform: translateY(0); /* Start at original position */
+                }
+                50% {
+                    transform: translateY(10px); /* Drop down slightly */
+                }
+                100% {
+                    transform: translateY(0); /* Float back up */
+                }
+            }
+
+            .info-section {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin: 50px 20px;
+                padding: 30px;
+                background: linear-gradient(135deg, #FFA9F9, #FFF7AD); /* Gradient background */
+                border-radius: 15px;
+                position: relative;
+                overflow: hidden;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+                opacity: 0; /* Initially hidden */
+                transform: translateY(20px); /* Slide in from below */
+                transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Smooth animation */
+            }
+
+            .info-section.visible {
+                opacity: 1; /* Fully visible */
+                transform: translateY(0); /* Reset position */
+            }
+
+            .info-section::before,
+            .info-section::after {
+                content: '';
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.3); /* Semi-transparent circles */
+                z-index: 0;
+                animation: moveCircles 10s infinite alternate ease-in-out; /* Add animation */
+            }
+
+            .info-section::before {
+                width: 150px;
+                height: 150px;
+                top: -50px;
+                left: -50px;
+            }
+
+            .info-section::after {
+                width: 200px;
+                height: 200px;
+                bottom: -70px;
+                right: -70px;
+            }
+
+            @keyframes moveCircles {
+                0% {
+                    transform: translate(0, 0);
+                }
+                50% {
+                    transform: translate(60px, -60px);
+                }
+                100% {
+                    transform: translate(-60px, 60px);
+                }
+            }
+
+            .info-video {
+                flex: 1;
+                z-index: 1; /* Above background shapes */
+                margin-right: 20px;
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .info-video video {
+                width: 100%;
+                height: auto; /* Maintain aspect ratio */
+                border-radius: 10px;
+            }
+
+            .info-description {
+                flex: 1;
+                z-index: 1; /* Above background shapes */
+                font-size: 20px;
+                color: #333333;
+                line-height: 1.6;
+            }
+
+            .find-library-button-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 30px 0; /* Add spacing around the button */
+            }
+
+            .find-library-button {
+                display: inline-block;
+                padding: 15px 40px;
+                font-size: 20px;
+                font-weight: bold;
+                color: #ffffff;
+                background-color: #f8bb02; /* Button color */
+                border: none;
+                border-radius: 50px; /* Rounded button */
+                text-align: center;
+                text-decoration: none;
+                cursor: pointer;
+                position: relative; /* For the shimmering effect */
+                overflow: hidden; /* Hide the stripe outside the button */
+                transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Add dynamic effects */
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            }
+
+            .find-library-button::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%; /* Start outside the button */
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(120deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0.3) 100%);
+                transform: skewX(-30deg); /* Create diagonal stripe */
+                transition: none;
+                animation: shimmer 3s infinite; /* Trigger periodically */
+            }
+
+            @keyframes shimmer {
+                0% {
+                    left: -100%;
+                }
+                50% {
+                    left: 100%; /* Move across the button */
+                }
+                100% {
+                    left: 100%;
+                }
+            }
+
+            .find-library-button:hover {
+                transform: scale(1.1); /* Slightly enlarge on hover */
+                box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+                background-color: #e0a802; /* Slightly darker color on hover */
+            }
+
+            .find-library-button:active {
+                transform: scale(1.05); /* Slightly shrink on click */
+                box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2); /* Adjust shadow on click */
+            }
+
+            .supporters-card {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                background: linear-gradient(135deg, #FFA9F9, #FFF7AD); /* Gradient background */
+                border-radius: 15px; /* Rounded corners */
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+                padding: 30px;
+                margin: 50px 20px; /* Add spacing around the card */
+                position: relative;
+                overflow: hidden; /* Ensure content respects border radius */
+            }
+
+            .supporters-card h2 {
+                font-size: 36px;
+                color: #333333;
+                margin-bottom: 20px;
+            }
+
+            .supporters-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .supporter-card {
+                position: relative;
+                width: 150px;
+                height: 150px;
+                border-radius: 50%; /* Circular shape */
+                overflow: hidden;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                cursor: pointer;
+            }
+
+            .supporter-card img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: filter 0.3s ease, transform 0.3s ease;
+            }
+
+            .supporter-card:hover img {
+                filter: grayscale(100%) blur(2px);
+                transform: scale(1.1);
+            }
+
+            .supporter-info {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                color: #ffffff;
+                background-color: rgba(0, 0, 0, 0.7); /* Cover the entire circle */
+                border-radius: 50%; /* Ensure it matches the circle shape */
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                pointer-events: none;
+            }
+
+            .supporter-card:hover .supporter-info {
+                opacity: 1;
+            }
+
+            .footerDiv {
+                background-image: linear-gradient(135deg, #FFA9F9, #FFF7AD); /* Footer color */
+                margin-top: 50px; /* Add spacing above the footer */
+                margin-bottom: 50px; /* Add spacing below the footer */
+                padding: 7.5px;
+                display: flex; /* Align items in a row */
+                justify-content: space-between; /* Space between elements */
+                align-items: center; /* Center vertically */
+                padding: 15px;
+            }
+
+            .footerDiv p {
+                font-size: 25px;
+                color: #636363;
+                margin: 0; /* Remove default margin */
+            }
+
+            .footerDiv h1 {
+                font-size: 25px;
+                color: #636363;
+                font-weight: normal;
+                margin: 0; /* Remove default margin */
+            }
+        </style>
+        <script>
+            document.addEventListener('scroll', function () {
+                const topMenu = document.querySelector('.top-menu');
+                if (window.scrollY > 0) {
+                    topMenu.classList.add('scrolled');
+                } else {
+                    topMenu.classList.remove('scrolled');
+                }
+
+                const scrollIndicator = document.querySelector('.scroll-indicator');
+                const mapCounterCard = document.querySelector('.map-counter-card');
+                const map = document.querySelector('.google-map');
+                const counter = document.querySelector('.counter');
+                const libraryBuiltPlaceholder = document.querySelector('.library-built-placeholder');
+                const descriptions = document.querySelectorAll('.description'); // Handle multiple descriptions
+                const downArrows = document.querySelectorAll('.down-arrow'); // Handle multiple arrows
+                const infoSection = document.querySelector('.info-section'); // Handle info section
+                const windowHeight = window.innerHeight;
+
+                // Show/hide scroll indicator
+                if (window.scrollY > 0) {
+                    scrollIndicator.classList.add('hidden');
+                } else {
+                    scrollIndicator.classList.remove('hidden');
+                }
+
+                // Trigger animation for map and counter when they come into view
+                const mapCounterPosition = mapCounterCard.getBoundingClientRect().top;
+                if (mapCounterPosition < windowHeight - 100) {
+                    if (libraryBuiltPlaceholder && !libraryBuiltPlaceholder.classList.contains('hidden')) {
+                        libraryBuiltPlaceholder.classList.add('hidden'); // Fade out placeholder
+                        setTimeout(() => {
+                            libraryBuiltPlaceholder.remove(); // Delete placeholder after fade-out
+                            mapCounterCard.classList.add('visible'); // Show the card
+                            map.classList.add('visible');
+                            counter.classList.add('visible');
+                        }, 500); // Match the fade-out duration
+                    } else {
+                        mapCounterCard.classList.add('visible'); // Show the card
+                        map.classList.add('visible');
+                        counter.classList.add('visible');
+                    }
+                }
+
+                // Trigger animation for each description and its arrow when they come into view
+                descriptions.forEach((description, index) => {
+                    const descriptionPosition = description.getBoundingClientRect().top;
+                    if (descriptionPosition < windowHeight - 100) { // Trigger when in view
+                        const descriptionLines = description.querySelectorAll('p');
+                        descriptionLines.forEach((line, lineIndex) => {
+                            setTimeout(() => {
+                                line.classList.add('visible'); // Show each line one by one
+                            }, lineIndex * 300); // Delay between lines
+                        });
+                        if (downArrows[index]) {
+                            setTimeout(() => {
+                                downArrows[index].classList.add('visible'); // Show arrow after description
+                            }, descriptionLines.length * 300); // Delay for arrow
+                        }
+                    }
+                });
+
+                // Trigger animation for the info section when it comes into view
+                const infoSectionPosition = infoSection.getBoundingClientRect().top;
+                if (infoSectionPosition < windowHeight - 100) {
+                    infoSection.classList.add('visible');
+                }
+            });
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const counterElement = document.querySelector('.counter-number');
+                let count = 0;
+                const target = 1001; // Replace with the desired target number
+                const increment = Math.ceil(target / 100); // Adjust increment speed
+
+                const updateCounter = () => {
+                    if (count < target) {
+                        count += increment;
+                        if (count > target) count = target; // Ensure it doesn't exceed the target
+                        counterElement.textContent = count;
+                        setTimeout(updateCounter, 100); // Adjust speed of counting
+                    }
+                };
+
+                updateCounter();
+            });
+        </script>
+    </head>
+    <body>
+        <div class="top-menu">
+            <div class="logo">
+                <img src="/static/resources/logo.jpg" alt="1001 Libraries Logo"> <!-- Replace with your logo file -->
+                <span>1001 Libraries</span>
+            </div>
+            <div class="menu-links">
+                <a href="/">Home</a>
+                <a href="/about">About Us</a>
+                <a href="/libraries">Libraries</a>
+                <a href="/events">Events</a>
+                <a href="/join">Join Us</a>
+            </div>
+        </div>
+        <div class="library-theme-video">
+            <video autoplay muted loop>
+                <source src="/static/resources/library-theme-video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="overlay-box">
+                <h1>“1001 Libraries: From Books to Hearts”</h1>
+            </div>
+        </div>
+        <div class="scroll-indicator">Scroll Down To Learn More</div>
+        <div class="library-built-placeholder">Libraries Built</div>
+        <div class="map-counter-card">
+            <iframe 
+                class="google-map"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.9537353153169!3d-37.81627974202171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577d8b3c1b0b1c!2sState%20Library%20Victoria!5e0!3m2!1sen!2sau!4v1697040000000!5m2!1sen!2sau" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+            <div class="counter">
+                <div>Libraries Built</div>
+                <div class="counter-number">0</div>
+            </div>
+        </div>
+        <div class="description">
+            <p>Explore the vast network of libraries across the globe.</p>
+            <p>Each library is a gateway to knowledge and community.</p>
+            <p>Join us in building a brighter future through books and learning.</p>
+        </div>
+        <div class="down-arrow">↓</div>
+        <div class="info-section">
+            <div class="info-video">
+                <video controls>
+                    <source src="/static/resources/library-theme-video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="info-description">
+                <h2>Learn More About Our Mission</h2>
+                <p>Discover how 1001 Libraries is transforming communities through the power of books and education. Watch this video to see the impact of our work and how you can be a part of this journey.</p>
+            </div>
+        </div>
+        <div class="description">
+            <p>Explore the vast network of libraries across the globe.</p>
+            <p>Each library is a gateway to knowledge and community.</p>
+            <p>Join us in building a brighter future through books and learning.</p>
+        </div>
+        <div class="find-library-button-container">
+            <a href="/libraries" class="find-library-button">Find/Build a Library</a>
+        </div>
+        <div class="down-arrow">↓</div>
+        <div class="supporters-card">
+            <h2>Our Supporters</h2>
+            <div class="supporters-container">
+                <div class="supporter-card">
+                    <img src="/static/resources/supporter1.jpg" alt="Supporter 1">
+                    <div class="supporter-info">
+                        <strong>John Doe</strong>
+                        <p>Philanthropist & Book Lover</p>
+                    </div>
+                </div>
+                <div class="supporter-card">
+                    <img src="/static/resources/supporter2.jpg" alt="Supporter 2">
+                    <div class="supporter-info">
+                        <strong>Jane Smith</strong>
+                        <p>Community Organizer</p>
+                    </div>
+                </div>
+                <div class="supporter-card">
+                    <img src="/static/resources/supporter3.jpg" alt="Supporter 3">
+                    <div class="supporter-info">
+                        <strong>Emily Johnson</strong>
+                        <p>Education Advocate</p>
+                    </div>
+                </div>
+                <div class="supporter-card">
+                    <img src="/static/resources/supporter4.jpg" alt="Supporter 4">
+                    <div class="supporter-info">
+                        <strong>Michael Brown</strong>
+                        <p>Library Architect</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footerDiv">
+            <p>Contact: xxxxxx for any questions or concerns</p>
+            <h1>All rights reserved</h1>
+        </div>
+    </body>
+</html>
