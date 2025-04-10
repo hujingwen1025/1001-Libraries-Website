@@ -170,6 +170,7 @@
                 border-radius: 50%;
                 background: rgba(255, 255, 255, 0.3); /* Semi-transparent circles */
                 z-index: 0;
+                animation: moveCircles 10s infinite alternate ease-in-out; /* Add animation */
             }
 
             .map-counter-card::before {
@@ -246,7 +247,6 @@
 
             .scroll-indicator.hidden {
                 opacity: 0;
-                pointer-events: none;
             }
 
             .library-built-placeholder {
@@ -261,6 +261,23 @@
             .library-built-placeholder.hidden {
                 opacity: 0;
                 pointer-events: none;
+            }
+
+            .learn-more-placeholder {
+                text-align: center;
+                font-size: 80px;
+                color: #888888;
+                margin: 50px 0;
+                transition: opacity 0.5s ease-out; /* Smooth fade-in effect */
+            }
+
+            .learn-more-placeholder.visible {
+                opacity: 1; /* Fully visible */
+            }
+
+            .fade-out {
+                opacity: 0;
+                transition: opacity 0.5s ease-out; /* Smooth fade-out effect */
             }
 
             .description {
@@ -323,6 +340,13 @@
                 opacity: 0; /* Initially hidden */
                 transform: translateY(20px); /* Slide in from below */
                 transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Smooth animation */
+            }
+
+            .info-section.hidden {
+                /* Remove display: none; to allow transition */
+                opacity: 0;
+                transform: translateY(20px);
+                pointer-events: none;
             }
 
             .info-section.visible {
@@ -465,6 +489,33 @@
                 margin: 50px 20px; /* Add spacing around the card */
                 position: relative;
                 overflow: hidden; /* Ensure content respects border radius */
+                opacity: 0; /* Initially hidden */
+                transform: translateY(20px); /* Slide in from below */
+                transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Smooth animation */
+            }
+
+            .supporters-card.hidden {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            }
+
+            .supporters-card.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .supporters-placeholder {
+                text-align: center;
+                font-size: 80px;
+                color: #888888;
+                margin: 50px 0;
+                opacity: 1;
+                transition: opacity 0.5s ease-out;
+            }
+
+            .supporters-placeholder.fade-out {
+                opacity: 0;
             }
 
             .supporters-card h2 {
@@ -498,9 +549,12 @@
                 transition: filter 0.3s ease, transform 0.3s ease;
             }
 
-            .supporter-card:hover img {
-                filter: grayscale(100%) blur(2px);
+            .supporter-card:hover {
                 transform: scale(1.1);
+            }
+
+            .supporter-card:hover img {
+                filter: blur(2px);
             }
 
             .supporter-info {
@@ -519,7 +573,6 @@
                 border-radius: 50%; /* Ensure it matches the circle shape */
                 opacity: 0;
                 transition: opacity 0.3s ease;
-                pointer-events: none;
             }
 
             .supporter-card:hover .supporter-info {
@@ -549,6 +602,10 @@
                 font-weight: normal;
                 margin: 0; /* Remove default margin */
             }
+
+            .hugeEmoji {
+                font-size: 100px;
+            }
         </style>
         <script>
             document.addEventListener('scroll', function () {
@@ -564,9 +621,12 @@
                 const map = document.querySelector('.google-map');
                 const counter = document.querySelector('.counter');
                 const libraryBuiltPlaceholder = document.querySelector('.library-built-placeholder');
+                const learnMorePlaceholder = document.querySelector('.learn-more-placeholder');
                 const descriptions = document.querySelectorAll('.description'); // Handle multiple descriptions
                 const downArrows = document.querySelectorAll('.down-arrow'); // Handle multiple arrows
-                const infoSection = document.querySelector('.info-section'); // Handle info section
+                const infoSection = document.querySelector('.info-section');
+                const supportersPlaceholder = document.querySelector('.supporters-placeholder');
+                const supportersCard = document.querySelector('.supporters-card');
                 const windowHeight = window.innerHeight;
 
                 // Show/hide scroll indicator
@@ -577,20 +637,40 @@
                 }
 
                 // Trigger animation for map and counter when they come into view
-                const mapCounterPosition = mapCounterCard.getBoundingClientRect().top;
-                if (mapCounterPosition < windowHeight - 100) {
-                    if (libraryBuiltPlaceholder && !libraryBuiltPlaceholder.classList.contains('hidden')) {
-                        libraryBuiltPlaceholder.classList.add('hidden'); // Fade out placeholder
-                        setTimeout(() => {
-                            libraryBuiltPlaceholder.remove(); // Delete placeholder after fade-out
+                if (libraryBuiltPlaceholder != null) {
+                    var mapCounterPosition = libraryBuiltPlaceholder.getBoundingClientRect().top;
+                    if ((mapCounterPosition < windowHeight - libraryBuiltPlaceholder.offsetHeight) && mapCounterPosition != 0) {
+                        if (libraryBuiltPlaceholder && !libraryBuiltPlaceholder.classList.contains('hidden')) {
+                            libraryBuiltPlaceholder.classList.add('fade-out'); // Add fade-out class
+                            setTimeout(() => {
+                                libraryBuiltPlaceholder.remove(); // Delete placeholder after fade-out
+                                mapCounterCard.classList.add('visible'); // Show the card
+                                map.classList.add('visible');
+                                counter.classList.add('visible');
+                            }, 500); // Match the fade-out duration
+                        } else {
                             mapCounterCard.classList.add('visible'); // Show the card
                             map.classList.add('visible');
                             counter.classList.add('visible');
-                        }, 500); // Match the fade-out duration
-                    } else {
-                        mapCounterCard.classList.add('visible'); // Show the card
-                        map.classList.add('visible');
-                        counter.classList.add('visible');
+                        }
+                    }
+                }
+
+                // Trigger fade-in for the learn-more placeholder
+                if (learnMorePlaceholder != null) {
+                    var learnMorePosition = learnMorePlaceholder.getBoundingClientRect().top;
+                    if (learnMorePosition < windowHeight - learnMorePlaceholder.offsetHeight && learnMorePosition != 0) {
+                        if (!learnMorePlaceholder.classList.contains('hidden')) {
+                            learnMorePlaceholder.classList.add('fade-out'); // Add fade-out class
+                            setTimeout(() => {
+                                learnMorePlaceholder.remove(); // Delete placeholder after fade-out
+                                infoSection.classList.remove('hidden'); // Show the info-section
+                                infoSection.classList.add('visible'); // Trigger animation
+                            }, 500); // Match the fade-out duration
+                        } else {
+                            infoSection.classList.remove('hidden'); // Show the info-section
+                            infoSection.classList.add('visible'); // Trigger animation
+                        }
                     }
                 }
 
@@ -612,10 +692,20 @@
                     }
                 });
 
-                // Trigger animation for the info section when it comes into view
-                const infoSectionPosition = infoSection.getBoundingClientRect().top;
-                if (infoSectionPosition < windowHeight - 100) {
-                    infoSection.classList.add('visible');
+                // Trigger animation for supporters placeholder and card
+                if (supportersPlaceholder && supportersCard) {
+                    var supportersPosition = supportersPlaceholder.getBoundingClientRect().top;
+                    if (supportersPosition < windowHeight - supportersPlaceholder.offsetHeight && supportersPosition != 0) {
+                        if (!supportersPlaceholder.classList.contains('hidden')) {
+                            supportersPlaceholder.classList.add('fade-out'); // Reuse fade-out for smooth transition
+                            setTimeout(() => {
+                                supportersPlaceholder.remove();
+                                supportersCard.classList.add('visible');
+                            }, 500); // Match fade-out duration
+                        } else {
+                            supportersCard.classList.add('visible');
+                        }
+                    }
                 }
             });
 
@@ -662,7 +752,11 @@
             </div>
         </div>
         <div class="scroll-indicator">Scroll Down To Learn More</div>
-        <div class="library-built-placeholder">Libraries Built</div>
+        <div class="library-built-placeholder">
+            <span>Libraries Built</span><br>
+            <span class="hugeEmoji">📚</span>
+            <div>↓</div>
+        </div>
         <div class="map-counter-card">
             <iframe 
                 class="google-map"
@@ -682,7 +776,12 @@
             <p>Join us in building a brighter future through books and learning.</p>
         </div>
         <div class="down-arrow">↓</div>
-        <div class="info-section">
+        <div class="learn-more-placeholder">
+            <span>Learn More About Our Mission</span><br>
+            <span class="hugeEmoji">🎥</span>
+            <div>↓</div>
+        </div>
+        <div class="info-section hidden">
             <div class="info-video">
                 <video controls>
                     <source src="/static/resources/library-theme-video.mp4" type="video/mp4">
@@ -700,10 +799,15 @@
             <p>Join us in building a brighter future through books and learning.</p>
         </div>
         <div class="find-library-button-container">
-            <a href="/libraries" class="find-library-button">Find/Build a Library</a>
+            <a href="/libraries" class="find-library-button">Find / Build a Library</a>
         </div>
         <div class="down-arrow">↓</div>
-        <div class="supporters-card">
+        <div class="supporters-placeholder">
+            <span>Our Supporters</span><br>
+            <span class="hugeEmoji">👏</span>
+            <div>↓</div>
+        </div>
+        <div class="supporters-card hidden">
             <h2>Our Supporters</h2>
             <div class="supporters-container">
                 <div class="supporter-card">

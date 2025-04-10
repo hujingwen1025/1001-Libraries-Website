@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>1001 Libraries - Home</title>
+        <title>1001 Libraries - About</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta lang="en">
@@ -9,6 +9,11 @@
             @font-face {
                 font-family: "Slopes";
                 src: url("/static/fonts/slopes.ttf") format("truetype"); /* Added format declaration */
+            }
+
+            @font-face {
+                font-family: "Typewriter";
+                src: url("/static/fonts/typewriter.ttf") format("truetype"); /* Added format declaration */
             }
 
             body {
@@ -99,6 +104,200 @@
                 font-weight: normal;
                 margin: 0; /* Remove default margin */
             }
+
+            /* Updated card styles for vertical layout */
+            .card-container {
+                display: flex;
+                flex-direction: column;
+                margin: 35px 25px; /* Adjust vertical spacing as needed */
+            }
+            .card {
+                width: 100%;
+                height: 350px;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 24px;
+                font-weight: bold;
+                color: white;
+                margin: 0;
+            }
+            .card-top {
+                background: linear-gradient(45deg, #ffda75 0%, #ffda75 42.5%, #7c7b7a 42.5%, #7c7b7a 100%);
+                margin-bottom: 52.5px;
+                margin-left: -100px; /* Existing offset */
+                transform: translateX(-150%); /* Initially off-screen to left */
+                transition: transform 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Smooth animation with overshoot */
+            }
+            .card-bottom {
+                background: linear-gradient(45deg, #7c7b7a 0%, #7c7b7a 57.5%, #ede8d2 57.5%, #ede8d2 100%);
+                position: relative;
+                transform: translateX(150%); /* Initially off-screen to right */
+                transition: transform 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Smooth animation with overshoot */
+            }
+            /* Reset transform when visible */
+            .card-top.visible,
+            .card-bottom.visible {
+                transform: translateX(0);
+            }
+
+            /* Video and overlay styles (copied from home.html) */
+            .library-theme-video {
+                position: relative;
+                width: 100%;
+                height: 400px; /* Adjust height as needed */
+                overflow: hidden;
+                margin-top: 100px; /* Separation from top-menu */
+            }
+            .library-theme-video video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .overlay-box {
+                position: absolute;
+                top: 50%; /* Changed to center vertically */
+                left: 50%;
+                transform: translate(-50%, -50%); /* Center overlay */
+                background-color: rgba(255, 255, 255, 0.5);
+                padding: 20px;
+                text-align: center;
+                border-radius: 10px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .overlay-box h1 {
+                margin: 0;
+                font-size: 41.2px;
+                color: #000000;
+                font-family: 'Typewriter', sans-serif;
+                white-space: nowrap;
+                overflow: hidden;
+                border-right: 2px solid #000;
+                animation: typing 4s steps(30, end), blink 0.5s step-end infinite;
+            }
+            @keyframes typing {
+                from { width: 0; }
+                to { width: 100%; }
+            }
+            @keyframes blink {
+                from, to { border-color: transparent; }
+                50% { border-color: #000; }
+            }
+
+            /* Placeholder for sliding cards */
+            .cards-placeholder {
+                text-align: center;
+                font-size: 80px;
+                color: #888888;
+                margin: 50px 0;
+                opacity: 1;
+                transition: opacity 0.5s ease-out;
+            }
+            .cards-placeholder.hidden {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            .info-section {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin: 50px 20px;
+                padding: 30px;
+                background: linear-gradient(135deg, #FFA9F9, #FFF7AD); /* Gradient background */
+                border-radius: 15px;
+                position: relative;
+                overflow: hidden;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+                opacity: 0; /* Initially hidden */
+                transform: translateY(20px); /* Slide in from below */
+                transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Smooth animation */
+            }
+            .info-section.hidden {
+                opacity: 0;
+                transform: translateY(20px);
+                pointer-events: none;
+            }
+            .info-section.visible {
+                opacity: 1; /* Fully visible */
+                transform: translateY(0); /* Reset position */
+            }
+
+            .info-video {
+                border-radius: 10px; /* Keeps the video corners round */
+                overflow: hidden;      /* Ensures content stays within rounded corners */
+                height: 300px;         /* Set a fixed height for the info video */
+            }
+            .info-video video {
+                width: 100%;           /* Stretch to full width */
+                height: 100%;          /* Fill the container's height */
+                object-fit: cover;     /* Maintain correct aspect ratio */
+            }
+            .bottomCard {
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background-color: #f5f1e5;
+                padding: 5px;
+                padding-left: 25px; /* Added left padding to shift text to the right */
+            }
+            .bottomCardText {
+                width: 70%;
+            }
+            .bottomCardButtonDiv {
+                width: 30%;
+            }
+            .bottomCardButton {
+                display: inline-block;
+                padding: 15px 40px;
+                font-size: 20px;
+                font-weight: bold;
+                color: #ffffff;
+                background-color: #f8bb02; /* Button color */
+                border: none;
+                border-radius: 50px; /* Rounded button */
+                text-align: center;
+                text-decoration: none;
+                cursor: pointer;
+                position: relative; /* For the shimmering effect */
+                overflow: hidden; /* Hide the stripe outside the button */
+                transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Add dynamic effects */
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            }
+            /* Changed selector from .find-library-button to .bottomCardButton for shimmering effect */
+            .bottomCardButton::before {
+                pointer-events: none; /* Allows hover state to work smoothly */
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%; /* Start outside the button */
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(120deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0.3) 100%);
+                transform: skewX(-30deg); /* Create diagonal stripe */
+                transition: none;
+                animation: shimmer 3s infinite; /* Trigger periodically */
+            }
+
+            /* Added keyframes for shimmer animation */
+            @keyframes shimmer {
+                0% { left: -100%; }
+                50% { left: 100%; }
+                100% { left: 100%; }
+            }
+
+            .bottomCardButton:hover {
+                transform: scale(1.1); /* Slightly enlarge on hover */
+                box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+                background-color: #e0a802; /* Slightly darker color on hover */
+            }
+
+            .bottomCardButton:active {
+                transform: scale(1.05); /* Slightly shrink on click */
+                box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2); /* Adjust shadow on click */
+            }
         </style>
     </head>
     <body>
@@ -123,8 +322,84 @@
                 } else {
                     topMenu.classList.remove('scrolled');
                 }
+
+                // Slide in cards when they are in view
+                const cardTop = document.querySelector('.card-top');
+                const cardBottom = document.querySelector('.card-bottom');
+                const windowHeight = window.innerHeight;
+                if (cardTop && cardTop.getBoundingClientRect().top < windowHeight) {
+                    cardTop.classList.add('visible');
+                }
+                if (cardBottom && cardBottom.getBoundingClientRect().top < windowHeight) {
+                    cardBottom.classList.add('visible');
+                }
+
+                // Remove placeholder for sliding cards when in view
+                const cardsPlaceholder = document.querySelector('.cards-placeholder');
+                if (cardsPlaceholder && cardsPlaceholder.getBoundingClientRect().top < windowHeight) {
+                    if (!cardsPlaceholder.classList.contains('hidden')) {
+                        cardsPlaceholder.classList.add('hidden');
+                        setTimeout(() => { cardsPlaceholder.remove(); }, 500);
+                    }
+                }
+
+                // Unhide info-section if in view (appear when section top is less than 80% of window height)
+                const infoSections = document.querySelectorAll('.info-section');
+                infoSections.forEach(section => {
+                    if (section.getBoundingClientRect().top < window.innerHeight * 0.8) {
+                        section.classList.remove('hidden');
+                        section.classList.add('visible');
+                    }
+                });
             });
         </script>
+        <div class="library-theme-video">
+            <video autoplay muted loop>
+                <source src="/static/resources/library-theme-video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="overlay-box">
+                <h1>About 1001 Libraries</h1>
+            </div>
+        </div>
+        
+        <!-- Added sliding cards placeholder -->
+        <div class="cards-placeholder">
+            <span>About Us</span><br>
+            <span class="hugeEmoji">🔍</span>
+            <div>↓</div>
+        </div>
+        
+        <div class="card-container">
+            <div class="card card-top">
+                <h1>Card One</h1>
+            </div>
+            <div class="card card-bottom">
+                <!-- Card text -->
+                Card Two
+            </div>
+        </div>
+        <div class="info-section hidden">
+            <div class="info-description">
+                <h2>Learn More About Our Mission</h2>
+                <p>Discover how 1001 Libraries is transforming communities through the power of books and education. Watch this video to see the impact of our work and how you can be a part of this journey.</p>
+            </div>
+            <div class="info-video">
+                <video controls>
+                    <source src="/static/resources/library-theme-video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+        <div class="bottomCard">
+            <div class="bottomCardText">
+                <h1>Recent Works & Efforts</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Semper vel class aptent taciti sociosqu ad litora. Blandit quis suspendisse aliquet nisi sodales consequat magna. Cras eleifend turpis fames primis vulputate ornare sagittis. Sem placerat in id cursus mi pretium tellus. Orci varius natoque penatibus et magnis dis parturient. Finibus facilisis dapibus etiam interdum tortor ligula congue. Proin libero feugiat tristique accumsan maecenas potenti ultricies. Sed diam urna tempor pulvinar vivamus fringilla lacus. Eros lobortis nulla molestie mattis scelerisque maximus eget. Porta elementum a enim euismod quam justo lectus. Curabitur facilisi cubilia curae hac habitasse platea dictumst. Nisl malesuada lacinia integer nunc posuere ut hendrerit. Efficitur laoreet mauris pharetra vestibulum fusce dictum risus. Imperdiet mollis nullam volutpat porttitor ullamcorper rutrum gravida. Adipiscing elit quisque faucibus ex sapien vitae pellentesque. Ad litora torquent per conubia nostra inceptos himenaeos. Consequat magna ante condimentum neque at luctus nibh. Ornare sagittis vehicula praesent dui felis venenatis ultrices. Pretium tellus duis convallis tempus leo eu aenean. Dis parturient montes nascetur ridiculus mus donec rhoncus. Ligula congue sollicitudin erat viverra ac tincidunt nam. Potenti ultricies habitant morbi senectus netus suscipit auctor. Fringilla lacus nec metus bibendum egestas iaculis massa. Maximus eget fermentum odio phasellus non purus est. Justo lectus commodo augue arcu dignissim velit aliquam. Platea dictumst lorem ipsum dolor sit amet consectetur. Ut hendrerit semper vel class aptent taciti sociosqu. Dictum risus blandit quis suspendisse aliquet nisi sodales. Rutrum gravida cras eleifend turpis fames primis vulputate. Vitae pellentesque sem placerat in id cursus mi. Inceptos himenaeos orci varius natoque penatibus et magnis. Luctus nibh finibus facilisis dapibus etiam interdum tortor. Venenatis ultrices proin libero feugiat tristique accumsan maecenas. Eu aenean sed diam urna tempor pulvinar vivamus. Donec rhoncus eros lobortis nulla molestie mattis scelerisque. Tincidunt nam porta elementum a enim euismod quam. Suscipit auctor curabitur facilisi cubilia curae hac habitasse. Iaculis massa nisl malesuada lacinia integer nunc posuere. Purus est efficitur laoreet mauris pharetra vestibulum fusce. Velit aliquam imperdiet mollis nullam volutpat porttitor ullamcorper. Amet consectetur adipiscing elit quisque faucibus ex sapien. Taciti sociosqu ad litora torquent per conubia nostra. Nisi sodales consequat magna ante condimentum neque at. Primis vulputate ornare sagittis vehicula praesent dui felis. Cursus mi pretium tellus duis convallis tempus leo. Et magnis dis parturient montes nascetur ridiculus mus. Interdum tortor ligula congue sollicitudin erat viverra ac. Accumsan maecenas potenti ultricies habitant morbi senectus netus. Pulvinar vivamus fringilla lacus nec metus bibendum egestas.</p>
+            </div>
+            <div class="bottomCardButtonDiv">
+                <center><button class="bottomCardButton">Find / build a library</button></center>
+            </div>
+        </div>
         <div class="footerDiv">
             <p>Contact: xxxxxx for any questions or concerns</p>
             <h1>All rights reserved</h1>
