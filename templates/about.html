@@ -126,27 +126,40 @@
                 margin: 0;
             }
             .card-top {
-                background: linear-gradient(45deg, #ffda75 0%, #ffda75 42.5%, #7c7b7a 42.5%, #7c7b7a 100%);
+                background: linear-gradient(45deg, #ffda75 0%, #ffda75 40%, #7c7b7a 40%, #7c7b7a 100%);
                 margin-bottom: 52.5px;
                 margin-left: 0px; /* Existing offset */
                 transform: translateX(-150%); /* Initially off-screen to left */
                 transition: transform 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Smooth animation with overshoot */
                 justify-content: flex-start; /* Align text to the left */
                 padding-left: 20px;          /* Optional left padding */
+                padding-right: 30px;
             }
             .card-top h1 {
-                width: 40%;
+                width: 30%;
+            }
+            .card-top p {
+                width: 70%;
+                text-align: justify; /* Justify text for better readability */
             }
             .card-bottom {
-                background: linear-gradient(45deg, #7c7b7a 0%, #7c7b7a 57.5%, #ede8d2 57.5%, #ede8d2 100%);
+                background: linear-gradient(45deg, #7c7b7a 0%, #7c7b7a 60%, #ede8d2 60%, #ede8d2 100%);
                 position: relative;
                 transform: translateX(150%); /* Initially off-screen to right */
                 transition: transform 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Smooth animation with overshoot */
-                justify-content: flex-end;   /* Align text to the right */
+justify-content: flex-end;   /* Align text to the right */
                 padding-left: 20px;         /* Optional right padding */
+                padding-right: 30px;
             }
-            .card-bottom h1{
-                width: 40%;
+            .card-bottom h1 {
+                order: 2; /* Move title to the right */
+                width: 30%;
+                text-align: right;
+            }
+            .card-bottom p {
+                order: 1; /* Move text to the left */
+                width: 70%;
+                text-align: justify; /* Justify text for better readability */
             }
             /* Reset transform when visible */
             .card-top.visible,
@@ -385,11 +398,11 @@
         <div class="card-container">
             <div class="card card-top">
                 <h1>What is 1001 Libraries</h1>
-                <p>Discover how 1001 Libraries is transforming communities through the power of books and education. Watch this video to see the impact of our work and how you can be a part of this journey.</p>
+                <p>Discover how 1001 Libraries is transforming communities through the power of books and education. Watch this video to see the impact of our work and how you can be a part of this journey. Lorem ipsum dolor sit amet consectetur adipiscing elit. Semper vel class aptent taciti sociosqu ad litora. Blandit quis suspendisse aliquet nisi sodales consequat magna. Cras eleifend turpis fames primis vulputate ornare sagittis. Sem placerat in id cursus mi pretium tellus. Orci varius natoque penatibus et magnis dis parturient. Finibus facilisis dapibus etiam interdum tortor ligula congue. Proin libero feugiat tristique accumsan maecenas potenti ultricies. Sed diam urna tempor pulvinar vivamus fringilla lacus. Eros lobortis nulla molestie mattis scelerisque maximus eget. Porta elementum a enim euismod quam justo lectus. </p>
             </div>
             <div class="card card-bottom">
                 <h1>Our Mission</h1>
-                <p>Discover how 1001 Libraries is transforming communities through the power of books and education. Watch this video to see the impact of our work and how you can be a part of this journey.</p>
+                <p>Discover how 1001 Libraries is transforming communities through the power of books and education. Watch this video to see the impact of our work and how you can be a part of this journey. Lorem ipsum dolor sit amet consectetur adipiscing elit. Semper vel class aptent taciti sociosqu ad litora. Blandit quis suspendisse aliquet nisi sodales consequat magna. Cras eleifend turpis fames primis vulputate ornare sagittis. Sem placerat in id cursus mi pretium tellus. Orci varius natoque penatibus et magnis dis parturient. Finibus facilisis dapibus etiam interdum tortor ligula congue. Proin libero feugiat tristique accumsan maecenas potenti ultricies. Sed diam urna tempor pulvinar vivamus fringilla lacus. Eros lobortis nulla molestie mattis scelerisque maximus eget. Porta elementum a enim euismod quam justo lectus. </p>
             </div>
         </div>
         <div class="info-section hidden">
