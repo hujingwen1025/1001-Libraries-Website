@@ -109,7 +109,9 @@
             .card-container {
                 display: flex;
                 flex-direction: column;
+                align-items: center;
                 margin: 35px 25px; /* Adjust vertical spacing as needed */
+                padding: 0;
             }
             .card {
                 width: 100%;
@@ -126,15 +128,25 @@
             .card-top {
                 background: linear-gradient(45deg, #ffda75 0%, #ffda75 42.5%, #7c7b7a 42.5%, #7c7b7a 100%);
                 margin-bottom: 52.5px;
-                margin-left: -100px; /* Existing offset */
+                margin-left: 0px; /* Existing offset */
                 transform: translateX(-150%); /* Initially off-screen to left */
                 transition: transform 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Smooth animation with overshoot */
+                justify-content: flex-start; /* Align text to the left */
+                padding-left: 20px;          /* Optional left padding */
+            }
+            .card-top h1 {
+                width: 40%;
             }
             .card-bottom {
                 background: linear-gradient(45deg, #7c7b7a 0%, #7c7b7a 57.5%, #ede8d2 57.5%, #ede8d2 100%);
                 position: relative;
                 transform: translateX(150%); /* Initially off-screen to right */
                 transition: transform 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Smooth animation with overshoot */
+                justify-content: flex-end;   /* Align text to the right */
+                padding-left: 20px;         /* Optional right padding */
+            }
+            .card-bottom h1{
+                width: 40%;
             }
             /* Reset transform when visible */
             .card-top.visible,
@@ -372,11 +384,12 @@
         
         <div class="card-container">
             <div class="card card-top">
-                <h1>Card One</h1>
+                <h1>What is 1001 Libraries</h1>
+                <p>Discover how 1001 Libraries is transforming communities through the power of books and education. Watch this video to see the impact of our work and how you can be a part of this journey.</p>
             </div>
             <div class="card card-bottom">
-                <!-- Card text -->
-                Card Two
+                <h1>Our Mission</h1>
+                <p>Discover how 1001 Libraries is transforming communities through the power of books and education. Watch this video to see the impact of our work and how you can be a part of this journey.</p>
             </div>
         </div>
         <div class="info-section hidden">
