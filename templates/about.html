@@ -326,6 +326,31 @@ justify-content: flex-end;   /* Align text to the right */
                 transform: scale(1.05); /* Slightly shrink on click */
                 box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2); /* Adjust shadow on click */
             }
+
+            /* New CSS for navigation bar below the video */
+            .pageSwitchNav {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                width: 100%;
+                background-color: #ede8d2;
+                padding: 20px 0;
+                margin: 0;
+            }
+            .pageSwitchNav a {
+                font-size: 25px;
+            }
+            .pageSwitchNav a:hover {
+                text-decoration: underline;
+            }
+            .selectedNav {
+                color: #a17d60;
+                text-decoration: underline;
+            }
+            .normalNav {
+                color: #000000;
+                text-decoration: none;
+            }
         </style>
     </head>
     <body>
@@ -389,6 +414,12 @@ justify-content: flex-end;   /* Align text to the right */
             <div class="overlay-box">
                 <h1>About 1001 Libraries</h1>
             </div>
+        </div>
+        <!-- New navigation bar below the video -->
+        <div class="pageSwitchNav">
+            <a href="/about" class="selectedNav">Overview</a>
+            <a href="/fund" class="normalNav">1001 Fund</a>
+            <a href="/founding" class="normalNav">Founding Members</a>
         </div>
         
         <!-- Added sliding cards placeholder -->

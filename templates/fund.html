@@ -209,6 +209,16 @@
                 from, to { border-color: transparent; }
                 50% { border-color: #000; }
             }
+            /* Added card animation styles */
+            .topCard, .card2Div {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            }
+            .topCard.visible, .card2Div.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
             .card2Div {
                 display: flex;
                 flex-direction: column; /* Changed to column layout */
@@ -254,6 +264,43 @@
             .orangeYellow {
                 background-color: #ffda75;
             }
+            /* Added placeholder for sliding cards */
+            .cards-placeholder {
+                text-align: center;
+                font-size: 80px;
+                color: #888888;
+                margin: 50px 0;
+                opacity: 1;
+                transition: opacity 0.5s ease-out;
+            }
+            .cards-placeholder.hidden {
+                opacity: 0;
+                pointer-events: none;
+            }
+            /* New navigation bar below the video with overlay */
+            .pageSwitchNav {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                width: 100%;
+                background-color: #ede8d2;
+                padding: 20px 0;
+                margin: 0;
+            }
+            .pageSwitchNav a {
+                font-size: 25px;
+            }
+            .pageSwitchNav a:hover {
+                text-decoration: underline;
+            }
+            .selectedNav {
+                color: #a17d60;
+                text-decoration: underline;
+            }
+            .normalNav {
+                color: #000000;
+                text-decoration: none;
+            }
         </style>
     </head>
     <body>
@@ -280,6 +327,18 @@
                 <h1>Support 1001 Libraries</h1>
             </div>
         </div>
+        <!-- New navigation bar below the video -->
+        <div class="pageSwitchNav">
+            <a href="/about" class="normalNav">Overview</a>
+            <a href="/fund" class="selectedNav">1001 Fund</a>
+            <a href="/founding" class="normalNav">Founding Members</a>
+        </div>
+        <!-- New placeholder for sliding cards -->
+        <div class="cards-placeholder">
+            <span>Finding Impact...</span><br>
+            <span class="hugeEmoji">⌛</span>
+            <div>↓</div>
+        </div>
         <script>
             document.addEventListener('scroll', function () {
                 const topMenu = document.querySelector('.top-menu');
@@ -287,6 +346,21 @@
                     topMenu.classList.add('scrolled');
                 } else {
                     topMenu.classList.remove('scrolled');
+                }
+                /* Added card animation trigger */
+                const cards = document.querySelectorAll('.topCard, .card2Div');
+                cards.forEach(card => {
+                    if (card.getBoundingClientRect().top < window.innerHeight * 0.8) {
+                        card.classList.add('visible');
+                    }
+                });
+                // Placeholder removal once in view
+                const cardsPlaceholder = document.querySelector('.cards-placeholder');
+                if (cardsPlaceholder && cardsPlaceholder.getBoundingClientRect().top < window.innerHeight) {
+                    if (!cardsPlaceholder.classList.contains('hidden')) {
+                        cardsPlaceholder.classList.add('hidden');
+                        setTimeout(() => { cardsPlaceholder.remove(); }, 500);
+                    }
                 }
             });
         </script>

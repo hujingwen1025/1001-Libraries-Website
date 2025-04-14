@@ -99,6 +99,72 @@
                 font-weight: normal;
                 margin: 0; /* Remove default margin */
             }
+
+            /* Added overlay video and pageSwitchNav CSS from about.html */
+            .library-theme-video {
+                position: relative;
+                width: 100%;
+                height: 400px; /* Adjust height as needed */
+                overflow: hidden;
+                margin-top: 100px; /* Separation from top-menu */
+            }
+            .library-theme-video video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .overlay-box {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: rgba(255,255,255,0.5);
+                padding: 20px;
+                text-align: center;
+                border-radius: 10px;
+                box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+            }
+            .overlay-box h1 {
+                margin: 0;
+                font-size: 41.2px;
+                color: #000000;
+                font-family: 'Typewriter', sans-serif;
+                white-space: nowrap;
+                overflow: hidden;
+                border-right: 2px solid #000;
+                animation: typing 4s steps(30, end), blink 0.5s step-end infinite;
+            }
+            @keyframes typing {
+                from { width: 0; }
+                to { width: 100%; }
+            }
+            @keyframes blink {
+                from, to { border-color: transparent; }
+                50% { border-color: #000; }
+            }
+            .pageSwitchNav {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                width: 100%;
+                background-color: #ede8d2;
+                padding: 20px 0;
+                margin: 0;
+            }
+            .pageSwitchNav a {
+                font-size: 25px;
+            }
+            .pageSwitchNav a:hover {
+                text-decoration: underline;
+            }
+            .selectedNav {
+                color: #a17d60;
+                text-decoration: underline;
+            }
+            .normalNav {
+                color: #000000;
+                text-decoration: none;
+            }
         </style>
     </head>
     <body>
@@ -125,6 +191,22 @@
                 }
             });
         </script>
+        <!-- Insert overlay video with overlay box -->
+        <div class="library-theme-video">
+            <video autoplay muted loop>
+                <source src="/static/resources/library-theme-video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="overlay-box">
+                <h1>Founding 1001 Libraries</h1>
+            </div>
+        </div>
+        <!-- Insert navigation bar below the video -->
+        <div class="pageSwitchNav">
+            <a href="/about" class="normalNav">Overview</a>
+            <a href="/fund" class="normalNav">1001 Fund</a>
+            <a href="/founding" class="selectedNav">Founding Members</a>
+        </div>
         <div class="footerDiv">
             <p>Contact: xxxxxx for any questions or concerns</p>
             <h1>All rights reserved</h1>
