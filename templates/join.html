@@ -10,6 +10,10 @@
                 font-family: "Slopes";
                 src: url("/static/fonts/slopes.ttf") format("truetype"); /* Added format declaration */
             }
+            @font-face {
+                font-family: "Typewriter";
+                src: url("/static/fonts/typewriter.ttf") format("truetype"); /* Added format declaration */
+            }
 
             body {
                 font-family: 'Slopes', sans-serif; /* Added fallback font */
@@ -28,7 +32,7 @@
                 top: 0;
                 left: 0;
                 right: 0;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Added shadow */
+                box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Increased shadow */
                 z-index: 1000; /* Ensure the menu bar is always on top */
                 transition: margin 0.5s cubic-bezier(0.22, 1, 0.36, 1.55), border-radius 0.5s cubic-bezier(0.22, 1, 0.36, 1.55); /* Overshoot only at the end */
             }
@@ -77,6 +81,49 @@
                 text-decoration: underline;
             }
 
+            /* Added video overlay styles */
+            .library-theme-video {
+                position: relative;
+                width: 100%;
+                height: 400px; /* Adjust height as needed */
+                overflow: hidden;
+                margin-top: 100px; /* Separation from top-menu */
+            }
+            .library-theme-video video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .overlay-box {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: rgba(255, 255, 255, 0.5);
+                padding: 20px;
+                text-align: center;
+                border-radius: 10px;
+                box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Increased shadow */
+            }
+            .overlay-box h1 {
+                margin: 0;
+                font-size: 41.2px;
+                color: #000000;
+                font-family: 'Typewriter', sans-serif;
+                white-space: nowrap;
+                overflow: hidden;
+                border-right: 2px solid #000;
+                animation: typing 4s steps(30, end), blink 0.5s step-end infinite;
+            }
+            @keyframes typing {
+                from { width: 0; }
+                to { width: 100%; }
+            }
+            @keyframes blink {
+                from, to { border-color: transparent; }
+                50% { border-color: #000; }
+            }
+
             .footerDiv {
                 background-image: linear-gradient(135deg, #FFA9F9, #FFF7AD); /* Footer color */
                 margin-top: 50px; /* Add spacing above the footer */
@@ -85,6 +132,7 @@
                 display: flex; /* Align items in a row */
                 justify-content: space-between; /* Space between elements */
                 align-items: center; /* Center vertically */
+                box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Increased shadow */
             }
 
             .footerDiv p {
@@ -98,6 +146,104 @@
                 color: #636363;
                 font-weight: normal;
                 margin: 0; /* Remove default margin */
+            }
+
+            /* Added description and down arrow CSS */
+            .description {
+                margin: 30px 20px;
+                text-align: center;
+                font-size: 35px;
+                color: #555555;
+            }
+            .description p {
+                opacity: 0;
+                transform: translateY(-20px);
+                transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            }
+            .description p.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            .down-arrow {
+                text-align: center;
+                font-size: 40px;
+                color: #a17d60;
+                margin-top: 20px;
+                opacity: 0;
+                font-family: 'Slopes', sans-serif; /* Added fallback font */
+                transform: translateY(-20px);
+                transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+                animation: floatArrow 3s infinite ease-in-out;
+            }
+            .down-arrow.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            @keyframes floatArrow {
+                0% { transform: translateY(0); }
+                50% { transform: translateY(10px); }
+                100% { transform: translateY(0); }
+            }
+
+            /* Added bottomCard styles and animations */
+            .bottomCard {
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background-color: #f5f1e5;
+                padding: 15px 25px;
+                margin: 30px 20px;
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Increased shadow */
+            }
+            .bottomCard.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            .bottomCardText {
+                width: 70%;
+            }
+            .bottomCardButtonDiv {
+                width: 30%;
+                display: flex;
+                justify-content: center; /* Center the button */
+            }
+            .recruitmentTitle {
+                margin-left: 20px;
+                margin-top: 10px;
+                font-size: 40px;
+            }
+            .bottomCardButton {
+                display: inline-block;
+                padding: 15px 40px;
+                font-size: 20px;
+                font-weight: bold;
+                color: #ffffff;
+                background-color: #f8bb02;
+                border: none;
+                border-radius: 50px;
+                text-align: center;
+                text-decoration: none;
+                cursor: pointer;
+                transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+            .bottomCardButton:hover {
+                transform: scale(1.1);
+                box-shadow: 0 6px 10px rgba(0,0,0,0.2);
+                background-color: #e0a802;
+            }
+            .bottomCardButton:active {
+                transform: scale(1.05);
+                box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+            }
+            .smallDescription {
+                font-size: 25px;
+                text-align: left; /* added for left alignment */
+                padding-left: 20px;
             }
         </style>
     </head>
@@ -123,8 +269,77 @@
                 } else {
                     topMenu.classList.remove('scrolled');
                 }
+                // Updated code for description paragraphs
+                const descParagraphs = document.querySelectorAll('.description p');
+                descParagraphs.forEach(p => {
+                    if (p.getBoundingClientRect().top < window.innerHeight - 100) {
+                        p.classList.add('visible');
+                    }
+                });
+                // Updated code to process all down-arrow elements
+                const arrows = document.querySelectorAll('.down-arrow');
+                arrows.forEach(arrow => {
+                    if (arrow.getBoundingClientRect().top < window.innerHeight - 100) {
+                        arrow.classList.add('visible');
+                    }
+                });
+                // Trigger animation for bottom cards when in view
+                const bottomCards = document.querySelectorAll('.bottomCard');
+                bottomCards.forEach(card => {
+                    if (card.getBoundingClientRect().top < window.innerHeight - 100) {
+                        card.classList.add('visible');
+                    }
+                });
             });
         </script>
+        <!-- Added video with overlay -->
+        <div class="library-theme-video">
+            <video autoplay muted loop>
+                <source src="/static/resources/library-theme-video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="overlay-box">
+                <h1>Join 1001 Libraries</h1>
+            </div>
+        </div>
+        <!-- Added description and down arrow below the video -->
+        <div class="description">
+            <p>Discover a world of knowledge.</p>
+            <p>Every book opens a door.</p>
+            <p>Join us to unlock limitless possibilities.</p>
+        </div>
+        <div class="down-arrow">↓</div>
+        <!-- Updated bottom cards -->
+        <h1 class="recruitmentTitle">Recruitment Positions</h1>
+        <div class="bottomCard">
+            <div class="bottomCardText">
+                <h1>Position 1</h1>
+                <p>Meet like-minded readers and community leaders to share ideas and fuel growth. Discover how 1001 Libraries is transforming communities through the power of books and education. Watch this video to see the impact of our work and how you can be a part of this journey. Lorem ipsum dolor sit amet consectetur adipiscing elit. Semper vel class aptent taciti sociosqu ad litora. Blandit quis suspendisse aliquet nisi sodales consequat magna. Cras eleifend turpis fames primis vulputate ornare sagittis. Sem placerat in id cursus mi pretium tellus. Orci varius natoque penatibus et magnis dis parturient. Finibus facilisis dapibus etiam interdum tortor ligula congue. Proin libero feugiat tristique accumsan maecenas potenti ultricies. Sed diam urna tempor pulvinar vivamus fringilla lacus. Eros lobortis nulla molestie mattis scelerisque maximus eget. Porta elementum a enim euismod quam justo lectus.</p>
+            </div>
+            <div class="bottomCardButtonDiv">
+                <button class="bottomCardButton">Apply Now</button>
+            </div>
+        </div>
+        <div class="bottomCard">
+            <div class="bottomCardText">
+                <h1>Position 2</h1>
+                <p>Volunteer, donate, or simply spread the word – be part of our vibrant library community. Discover how 1001 Libraries is transforming communities through the power of books and education. Watch this video to see the impact of our work and how you can be a part of this journey. Lorem ipsum dolor sit amet consectetur adipiscing elit. Semper vel class aptent taciti sociosqu ad litora. Blandit quis suspendisse aliquet nisi sodales consequat magna. Cras eleifend turpis fames primis vulputate ornare sagittis. Sem placerat in id cursus mi pretium tellus. Orci varius natoque penatibus et magnis dis parturient. Finibus facilisis dapibus etiam interdum tortor ligula congue. Proin libero feugiat tristique accumsan maecenas potenti ultricies. Sed diam urna tempor pulvinar vivamus fringilla lacus. Eros lobortis nulla molestie mattis scelerisque maximus eget. Porta elementum a enim euismod quam justo lectus.</p>
+            </div>
+            <div class="bottomCardButtonDiv">
+                <button class="bottomCardButton">Apply Now</button>
+            </div>
+        </div>
+        <h1 class="recruitmentTitle">Recruitment / Application Process</h1>
+        <div class="description smallDescription">
+            <p>1. Fill-out the application form.</p>
+            <p>2. The team will contact you through email in about 1 week after the submission. We will notify you about whether the first round of selection was passed.</p>
+            <p>3. If passing the selection, we will set up a small 10-min interview with you to discuss briefly about your skills, visions, and goals.</p>
+            <p>4. The final result will be sent through email 1-2 weeks after the interview.</p>
+        </div>
+        <div class="down-arrow">↓</div>
+        <div class="description">
+            <p>For any questions, please contact: xxx</p>
+        </div>
         <div class="footerDiv">
             <p>Contact: xxxxxx for any questions or concerns</p>
             <h1>All rights reserved</h1>

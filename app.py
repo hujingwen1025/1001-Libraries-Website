@@ -22,5 +22,13 @@ def events():
 def join():
     return render_template('join.html')
 
+@app.route('/fund')
+def fund():
+    return render_template('fund.html')
+
+@app.route('/founding')
+def founding():
+    return render_template('founding.html')
+
 if __name__ == '__main__':
     app.run(debug=True, port=8085, host="0.0.0.0")

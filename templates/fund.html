@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>1001 Libraries - Home</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta lang="en">
+        <style>
+            @font-face {
+                font-family: "Slopes";
+                src: url("/static/fonts/slopes.ttf") format("truetype"); /* Added format declaration */
+            }
+
+            @font-face {
+                font-family: "Typewriter";
+                src: url("/static/fonts/typewriter.ttf") format("truetype"); /* Added format declaration */
+            }
+
+            body {
+                font-family: 'Slopes', sans-serif; /* Added fallback font */
+            }
+
+            /* Styles for the top menu bar */
+            .top-menu {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 25px 25px;
+                background: linear-gradient(to right, #FFF7AD, #FFA9F9); /* Gradient color */
+                color: white;
+                margin: 0;
+                position: fixed; /* Stick to the top */
+                top: 0;
+                left: 0;
+                right: 0;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Added shadow */
+                z-index: 1000; /* Ensure the menu bar is always on top */
+                transition: margin 0.5s cubic-bezier(0.22, 1, 0.36, 1.55), border-radius 0.5s cubic-bezier(0.22, 1, 0.36, 1.55); /* Overshoot only at the end */
+            }
+
+            .top-menu.scrolled {
+                margin: 10px 20px; /* Detach from edges */
+                border-radius: 10px; /* Optional: rounded corners */
+            }
+
+            .logo {
+                display: flex;
+                align-items: center;
+                color: #000000;
+                font-weight: bold;
+                font-size: 35px;
+            }
+
+            .logo img {
+                height: 40px;
+                margin-right: 10px;
+            }
+
+            .menu-links {
+                display: flex;
+                gap: 25px; /* Increased gap for more space */
+                font-size: 20px;
+            }
+
+            .menu-links a {
+                text-decoration: none;
+                color: #000000;
+                position: relative;
+            }
+
+            .menu-links a:not(:last-child)::after {
+                content: '';
+                position: absolute;
+                right: -12.5px; /* Centered within the increased gap */
+                top: 0;
+                height: 100%;
+                width: 2px; /* Increased width for bold effect */
+                background-color: #000000; /* Separator color */
+            }
+
+            .menu-links a:hover {
+                text-decoration: underline;
+            }
+
+            .footerDiv {
+                background-image: linear-gradient(135deg, #FFA9F9, #FFF7AD); /* Footer color */
+                margin-top: 50px; /* Add spacing above the footer */
+                margin-bottom: 50px; /* Add spacing below the footer */
+                padding: 15px;
+                display: flex; /* Align items in a row */
+                justify-content: space-between; /* Space between elements */
+                align-items: center; /* Center vertically */
+            }
+
+            .footerDiv p {
+                font-size: 25px;
+                color: #636363;
+                margin: 0; /* Remove default margin */
+            }
+
+            .footerDiv h1 {
+                font-size: 25px;
+                color: #636363;
+                font-weight: normal;
+                margin: 0; /* Remove default margin */
+            }
+
+            /* Updated topCard styles */
+            .topCard {
+                border-radius: 10px;
+                display: flex;
+                flex-direction: column; /* Changed to column layout */
+                align-items: center;
+                background-color: #f5f1e5;
+                padding: 5px 25px; /* Combined horizontal padding */
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+                margin: 30px 20px;
+                background-color: #FFCC66;
+            }
+            .topCard video {
+                width: 90%;
+                border-radius: 10px;
+            }
+            .topCardText {
+                width: 100%; /* Full width */
+                text-align: center; /* Center text if desired */
+                color: #545454
+            }
+            .topCardText h1 {
+                font-size: 40px;
+            }   
+            .topCardText p {
+                font-size: 25px;
+            }
+            .topCardButtonDiv {
+                width: 100%; /* Full width */
+                display: flex;
+                justify-content: center; /* Center the button */
+                gap: 30px; /* Added spacing between buttons */
+                margin-top: 10px; /* Add spacing above the button */
+                margin-bottom: 30px;
+            }
+            .topCardButton {
+                display: inline-block;
+                padding: 15px 40px;
+                font-size: 20px;
+                font-weight: bold;
+                color: #545454;
+                background-color: #f8f7f6;
+                border: none;
+                border-radius: 10px;
+                text-align: center;
+                text-decoration: none;
+                cursor: pointer;
+                position: relative;
+                overflow: hidden;
+                transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+            .topCardButton:hover {
+                transform: scale(1.1);
+                box-shadow: 0 6px 10px rgba(0,0,0,0.2);
+                background-color:rgb(210, 209, 208);
+            }
+            .topCardButton:active {
+                transform: scale(1.05);
+                box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+            }
+
+            /* Added video and overlay styles from about.html */
+            .library-theme-video {
+                position: relative;
+                width: 100%;
+                height: 400px;
+                overflow: hidden;
+                margin-top: 100px;
+            }
+            .library-theme-video video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .overlay-box {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: rgba(255,255,255,0.5);
+                padding: 20px;
+                text-align: center;
+                border-radius: 10px;
+                box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+            }
+            .overlay-box h1 {
+                margin: 0;
+                font-size: 41.2px;
+                color: #000000;
+                font-family: 'Typewriter', sans-serif;
+                white-space: nowrap;
+                overflow: hidden;
+                border-right: 2px solid #000;
+                animation: typing 4s steps(30, end), blink 0.5s step-end infinite;
+            }
+            @keyframes typing {
+                from { width: 0; }
+                to { width: 100%; }
+            }
+            @keyframes blink {
+                from, to { border-color: transparent; }
+                50% { border-color: #000; }
+            }
+            .card2Div {
+                display: flex;
+                flex-direction: column; /* Changed to column layout */
+                align-items: center;
+                padding: 5px 25px; /* Combined horizontal padding */
+                margin: 30px 20px;
+                color: #545454;
+            }
+            .card2Div h1 {
+                font-size: 40px;
+            }   
+            .card2Div p {
+                font-size: 25px;
+            }
+            /* New CSS for icon items */
+            .card2Icons {
+                display: flex;
+                justify-content: center;
+                gap: 50px;
+                width: 100%;
+                margin-top: 20px;
+            }
+            .icon-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .icon-item img {
+                height: 160px; /* set fixed height */
+                width: auto;   /* allow width to adjust based on aspect ratio */
+                margin-bottom: 10px;
+            }
+            .icon-item h2 {
+                font-size: 28px;
+                margin: 5px;
+                margin-bottom: 20px;
+            }
+            .icon-item p {
+                font-size: 18px;
+                margin: 0;
+            }
+            .orangeYellow {
+                background-color: #ffda75;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="top-menu">
+            <div class="logo">
+                <img src="/static/resources/logo.jpg" alt="1001 Libraries Logo"> <!-- Replace with your logo file -->
+                <span>1001 Libraries</span>
+            </div>
+            <div class="menu-links">
+                <a href="/">Home</a>
+                <a href="/about">About Us</a>
+                <a href="/libraries">Libraries</a>
+                <a href="/events">Events</a>
+                <a href="/join">Join Us</a>
+            </div>
+        </div>
+        <!-- Added video with overlay at the top -->
+        <div class="library-theme-video">
+            <video autoplay muted loop>
+                <source src="/static/resources/library-theme-video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="overlay-box">
+                <h1>Support 1001 Libraries</h1>
+            </div>
+        </div>
+        <script>
+            document.addEventListener('scroll', function () {
+                const topMenu = document.querySelector('.top-menu');
+                if (window.scrollY > 0) {
+                    topMenu.classList.add('scrolled');
+                } else {
+                    topMenu.classList.remove('scrolled');
+                }
+            });
+        </script>
+        <!-- Updated fund card -->
+        <div class="topCard">
+            <div class="topCardText">
+                <h1>Make an Impact</h1>
+                <p>Your Donation to our 1001 Fund can hugely contribute to our library constructions.</p>
+            </div>
+            <div class="topCardButtonDiv">
+                <button class="topCardButton">Donate as an individual</button>
+                <button class="topCardButton">Donate as an organization</button>
+            </div>
+        </div>
+        <div class="card2Div">
+            <h1>Use Of Fund</h1>
+            <!-- New icon row added below the title -->
+            <div class="card2Icons">
+                <div class="icon-item">
+                    <img src="/static/resources/library-icon.png" alt="Library Equipment Icon">
+                    <h2>Library Equipment</h2>
+                    <p>Supporting local libraries and educational programs.</p>
+                </div>
+                <div class="icon-item">
+                    <img src="/static/resources/book-icon.png" alt="Book Purchse">
+                    <h2>Book Purchse</h2>
+                    <p>Investing in digital resources and facility upgrades.</p>
+                </div>
+            </div>
+        </div>
+        <div class="topCard">
+            <div class="topCardText">
+                <h1>Every Donation is Greatly Appreciated!</h1>
+                <p>Your Donation to our 1001 Fund can hugely contribute to our library constructions.</p>
+                <p>Donation rules</p>
+            </div>
+        </div>
+        <div class="card2Div">
+            <h1>Other Impactful Actions</h1>
+            <!-- New icon row added below the title -->
+            <div class="card2Icons">
+                <div class="icon-item smaller-icon">
+                    <img src="/static/resources/gift-bw-icon.webp" alt="Library Equipment Icon">
+                    <h2>Gift for Local Students</h2>
+                </div>
+                <div class="icon-item smaller-icon">
+                    <img src="/static/resources/book-bw-icon.webp" alt="Book Purchse">
+                    <h2>Donate Second-hand / First-hand Book</h2>
+                </div>
+                <div class="icon-item smaller-icon">
+                    <img src="/static/resources/pencils-bw-icon.webp" alt="Book Purchse">
+                    <h2>Make an Impact Now</h2>
+                </div>
+            </div>
+            <button class="topCardButton orangeYellow">Donate as an individual</button>
+        </div>
+        <div class="topCard">
+            <div class="topCardText">
+                <p>We sincerely thank and express our gratitude to every sponsor and donor. </p>
+                <p>Your actions are making the day better for the children.</p>
+                <br>
+                <video autoplay muted loop controls>
+                    <source src="/static/resources/donation-video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+        <div class="footerDiv">
+            <p>Contact: xxxxxx for any questions or concerns</p>
+            <h1>All rights reserved</h1>
+        </div>
+    </body>
+</html>
