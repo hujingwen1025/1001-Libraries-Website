@@ -16,6 +16,11 @@
                 src: url("/static/fonts/typewriter.ttf") format("truetype"); /* Added format declaration */
             }
 
+            @font-face {
+                font-family: "Montserrat";
+                src: url("/static/fonts/montserrat.ttf") format("truetype"); /* Added format declaration */
+            }
+
             body {
                 font-family: 'Slopes', sans-serif; /* Added fallback font */
             }
@@ -340,6 +345,7 @@
                 opacity: 0; /* Initially hidden */
                 transform: translateY(20px); /* Slide in from below */
                 transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Smooth animation */
+                font-family: 'Montserrat', sans-serif; /* Added fallback font */
             }
 
             .info-section.hidden {
@@ -492,6 +498,7 @@
                 opacity: 0; /* Initially hidden */
                 transform: translateY(20px); /* Slide in from below */
                 transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Smooth animation */
+                font-family: 'Montserrat', sans-serif; /* Added fallback font */
             }
 
             .supporters-card.hidden {
@@ -588,6 +595,7 @@
                 justify-content: space-between; /* Space between elements */
                 align-items: center; /* Center vertically */
                 padding: 15px;
+                border-radius: 10px; /* Optional: rounded corners */
             }
 
             .footerDiv p {

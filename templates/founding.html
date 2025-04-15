@@ -11,6 +11,16 @@
                 src: url("/static/fonts/slopes.ttf") format("truetype"); /* Added format declaration */
             }
 
+            @font-face {
+                font-family: "Typewriter";
+                src: url("/static/fonts/typewriter.ttf") format("truetype"); /* Added format declaration */
+            }
+
+            @font-face {
+                font-family: "Montserrat";
+                src: url("/static/fonts/montserrat.ttf") format("truetype"); /* Added format declaration */
+            }
+
             body {
                 font-family: 'Slopes', sans-serif; /* Added fallback font */
             }
@@ -85,6 +95,7 @@
                 display: flex; /* Align items in a row */
                 justify-content: space-between; /* Space between elements */
                 align-items: center; /* Center vertically */
+                border-radius: 10px; /* Optional: rounded corners */
             }
 
             .footerDiv p {
@@ -165,6 +176,72 @@
                 color: #000000;
                 text-decoration: none;
             }
+
+            /* Added info-section card CSS */
+            .info-section {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin: 50px 20px;
+                padding: 30px;
+                background: linear-gradient(135deg, #FFA9F9, #FFF7AD);
+                border-radius: 15px;
+                position: relative;
+                overflow: hidden;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                opacity: 0; /* Initially hidden */
+                transform: translateY(20px); /* Slide in from below */
+                transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+                font-family: 'Montserrat', sans-serif; /* Added fallback font */
+            }
+            .info-section.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            .info-section::before,
+            .info-section::after {
+                content: '';
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(255,255,255,0.3);
+                z-index: 0;
+                animation: moveCircles 10s infinite alternate ease-in-out;
+            }
+            .info-section::before {
+                width: 150px;
+                height: 150px;
+                top: -50px;
+                left: -50px;
+            }
+            .info-section::after {
+                width: 200px;
+                height: 200px;
+                bottom: -70px;
+                right: -70px;
+            }
+            @keyframes moveCircles {
+                0% { transform: translate(0,0); }
+                50% { transform: translate(60px, -60px); }
+                100% { transform: translate(-60px,60px); }
+            }
+            .info-image {
+                border-radius: 10px;
+                overflow: hidden;
+                height: 400px;
+            }
+            .info-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .info-description {
+                flex: 1;
+                margin-left: 40px;
+                margin-right: 40px;
+                font-size: 20px;
+                color: #333333;
+                line-height: 1.6;
+            }
         </style>
     </head>
     <body>
@@ -189,6 +266,14 @@
                 } else {
                     topMenu.classList.remove('scrolled');
                 }
+                // Make all info-section cards appear when in view
+                const infoSections = document.querySelectorAll('.info-section');
+                infoSections.forEach(section => {
+                    if (section.getBoundingClientRect().top < window.innerHeight * 0.8) {
+                        section.classList.remove('hidden');
+                        section.classList.add('visible');
+                    }
+                });
             });
         </script>
         <!-- Insert overlay video with overlay box -->
@@ -206,6 +291,35 @@
             <a href="/about" class="normalNav">Overview</a>
             <a href="/fund" class="normalNav">1001 Fund</a>
             <a href="/founding" class="selectedNav">Founding Members</a>
+        </div>
+        <!-- Insert info-section cards before the footer -->
+        <div class="info-section hidden">
+            <div class="info-image">
+                <img src="/static/resources/person-icon.webp" alt="Founding Info Image">
+            </div>
+            <div class="info-description">
+                <h2>Our Founding Journey</h2>
+                <p>Learn about the inspiring vision and efforts of our founding members who paved the way for 1001 Libraries. Their dedication continues to fuel our mission to bring knowledge to communities everywhere.</p>
+            </div>
+        </div>
+        <div class="info-section hidden">
+            <div class="info-description">
+                <h2>Our Future Vision</h2>
+                <p>Discover our plans for the future and how we aim to expand our impact. Join us as we envision and build the next chapter in our journey to make knowledge accessible for all.</p>
+            </div>
+            <div class="info-image">
+                <img src="/static/resources/person-icon.webp" alt="Future Vision Image">
+            </div>
+        </div>
+        <!-- NEW: Insert additional info-section card -->
+        <div class="info-section hidden">
+            <div class="info-image">
+                <img src="/static/resources/person-icon.webp" alt="Community Impact Image">
+            </div>
+            <div class="info-description">
+                <h2>Community Impact</h2>
+                <p>Find out how our initiatives make a real difference in communities worldwide. Our projects create lasting change and empower local voices.</p>
+            </div>
         </div>
         <div class="footerDiv">
             <p>Contact: xxxxxx for any questions or concerns</p>

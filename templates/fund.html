@@ -16,6 +16,11 @@
                 src: url("/static/fonts/typewriter.ttf") format("truetype"); /* Added format declaration */
             }
 
+            @font-face {
+                font-family: "Montserrat";
+                src: url("/static/fonts/montserrat.ttf") format("truetype"); /* Added format declaration */
+            }
+
             body {
                 font-family: 'Slopes', sans-serif; /* Added fallback font */
             }
@@ -90,6 +95,7 @@
                 display: flex; /* Align items in a row */
                 justify-content: space-between; /* Space between elements */
                 align-items: center; /* Center vertically */
+                border-radius: 10px; /* Optional: rounded corners */
             }
 
             .footerDiv p {
@@ -335,7 +341,7 @@
         </div>
         <!-- New placeholder for sliding cards -->
         <div class="cards-placeholder">
-            <span>Finding Impact...</span><br>
+            <span>Finding Impact</span><br>
             <span class="hugeEmoji">⌛</span>
             <div>↓</div>
         </div>

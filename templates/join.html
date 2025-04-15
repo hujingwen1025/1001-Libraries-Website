@@ -15,6 +15,11 @@
                 src: url("/static/fonts/typewriter.ttf") format("truetype"); /* Added format declaration */
             }
 
+            @font-face {
+                font-family: "Montserrat";
+                src: url("/static/fonts/montserrat.ttf") format("truetype"); /* Added format declaration */
+            }
+
             body {
                 font-family: 'Slopes', sans-serif; /* Added fallback font */
             }
@@ -133,6 +138,7 @@
                 justify-content: space-between; /* Space between elements */
                 align-items: center; /* Center vertically */
                 box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Increased shadow */
+                border-radius: 10px; /* Optional: rounded corners */
             }
 
             .footerDiv p {
@@ -205,6 +211,7 @@
             }
             .bottomCardText {
                 width: 70%;
+                font-family: 'Montserrat', sans-serif; /* Added fallback font */
             }
             .bottomCardButtonDiv {
                 width: 30%;
@@ -214,7 +221,8 @@
             .recruitmentTitle {
                 margin-left: 20px;
                 margin-top: 10px;
-                font-size: 40px;
+                font-size: 35px;
+                font-family: 'Montserrat', sans-serif;
             }
             .bottomCardButton {
                 display: inline-block;
@@ -241,9 +249,10 @@
                 box-shadow: 0 3px 5px rgba(0,0,0,0.2);
             }
             .smallDescription {
-                font-size: 25px;
+                font-size: 15px;
                 text-align: left; /* added for left alignment */
                 padding-left: 20px;
+                font-family: 'Montserrat', sans-serif; /* Added fallback font */
             }
         </style>
     </head>

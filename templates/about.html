@@ -16,6 +16,11 @@
                 src: url("/static/fonts/typewriter.ttf") format("truetype"); /* Added format declaration */
             }
 
+            @font-face {
+                font-family: "Montserrat";
+                src: url("/static/fonts/montserrat.ttf") format("truetype"); /* Added format declaration */
+            }
+
             body {
                 font-family: 'Slopes', sans-serif; /* Added fallback font */
             }
@@ -91,6 +96,7 @@
                 justify-content: space-between; /* Space between elements */
                 align-items: center; /* Center vertically */
                 box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Increased shadow */
+                border-radius: 10px; /* Optional: rounded corners */
             }
 
             .footerDiv p {
@@ -113,6 +119,7 @@
                 align-items: center;
                 margin: 35px 25px; /* Adjust vertical spacing as needed */
                 padding: 0;
+                font-family: 'Montserrat', sans-serif; /* Added fallback font */
             }
             .card {
                 width: 100%;
@@ -139,17 +146,19 @@
             }
             .card-top h1 {
                 width: 30%;
+                font-size: 40px; /* Adjusted font size */
             }
             .card-top p {
                 width: 70%;
                 text-align: justify; /* Justify text for better readability */
+                font-size: 20px; /* Adjusted font size */
             }
             .card-bottom {
                 background: linear-gradient(45deg, #7c7b7a 0%, #7c7b7a 60%, #ede8d2 60%, #ede8d2 100%);
                 position: relative;
                 transform: translateX(150%); /* Initially off-screen to right */
                 transition: transform 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Smooth animation with overshoot */
-justify-content: flex-end;   /* Align text to the right */
+                justify-content: flex-end;   /* Align text to the right */
                 padding-left: 20px;         /* Optional right padding */
                 padding-right: 30px;
             }
@@ -157,11 +166,13 @@ justify-content: flex-end;   /* Align text to the right */
                 order: 2; /* Move title to the right */
                 width: 30%;
                 text-align: right;
+                font-size: 40px; /* Adjusted font size */
             }
             .card-bottom p {
                 order: 1; /* Move text to the left */
                 width: 70%;
                 text-align: justify; /* Justify text for better readability */
+                font-size: 20px; /* Adjusted font size */
             }
             /* Reset transform when visible */
             .card-top.visible,
@@ -351,6 +362,12 @@ justify-content: flex-end;   /* Align text to the right */
                 color: #000000;
                 text-decoration: none;
             }
+            .info-description h2 {
+                font-size: 35px;
+            }
+            .info-description p {
+                font-size: 20px;
+            }
         </style>
     </head>
     <body>
@@ -432,11 +449,11 @@ justify-content: flex-end;   /* Align text to the right */
         <div class="card-container">
             <div class="card card-top">
                 <h1>What is 1001 Libraries</h1>
-                <p>Discover how 1001 Libraries is transforming communities through the power of books and education. Watch this video to see the impact of our work and how you can be a part of this journey. Lorem ipsum dolor sit amet consectetur adipiscing elit. Semper vel class aptent taciti sociosqu ad litora. Blandit quis suspendisse aliquet nisi sodales consequat magna. Cras eleifend turpis fames primis vulputate ornare sagittis. Sem placerat in id cursus mi pretium tellus. Orci varius natoque penatibus et magnis dis parturient. Finibus facilisis dapibus etiam interdum tortor ligula congue. Proin libero feugiat tristique accumsan maecenas potenti ultricies. Sed diam urna tempor pulvinar vivamus fringilla lacus. Eros lobortis nulla molestie mattis scelerisque maximus eget. Porta elementum a enim euismod quam justo lectus. </p>
+                <p>Discover how 1001 Libraries is transforming communities through the power of books and education. Watch this video to see the impact of our work and how you can be a part of this journey. </p>
             </div>
             <div class="card card-bottom">
                 <h1>Our Mission</h1>
-                <p>Discover how 1001 Libraries is transforming communities through the power of books and education. Watch this video to see the impact of our work and how you can be a part of this journey. Lorem ipsum dolor sit amet consectetur adipiscing elit. Semper vel class aptent taciti sociosqu ad litora. Blandit quis suspendisse aliquet nisi sodales consequat magna. Cras eleifend turpis fames primis vulputate ornare sagittis. Sem placerat in id cursus mi pretium tellus. Orci varius natoque penatibus et magnis dis parturient. Finibus facilisis dapibus etiam interdum tortor ligula congue. Proin libero feugiat tristique accumsan maecenas potenti ultricies. Sed diam urna tempor pulvinar vivamus fringilla lacus. Eros lobortis nulla molestie mattis scelerisque maximus eget. Porta elementum a enim euismod quam justo lectus. </p>
+                <p>Discover how 1001 Libraries is transforming communities through the power of books and education. Watch this video to see the impact of our work and how you can be a part of this journey.  </p>
             </div>
         </div>
         <div class="info-section hidden">
