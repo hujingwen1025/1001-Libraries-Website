@@ -30,5 +30,9 @@ def fund():
 def founding():
     return render_template('founding.html')
 
+@app.route('/nextlibrary')
+def nextlibrary():
+    return render_template('nextlibrary.html')
+
 if __name__ == '__main__':
     app.run(debug=True, port=8085, host="0.0.0.0")

@@ -5,7 +5,6 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta lang="en">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
         <style>
             @font-face {
                 font-family: "Slopes";
@@ -178,92 +177,6 @@
                 color: #000000;
                 text-decoration: none;
             }
-
-            /* New Google Maps Card style with padding */
-            .google-map-card {
-                width: 100%;
-                padding: 20px 0;
-            }
-            .centerTitleDiv {
-                text-align: center;
-                margin: 20px 0; /* Add margin for spacing */
-                font-size: 20px;
-                font-weight: bold;
-                font-family: 'Montserrat', sans-serif;
-            }
-            .centerTitleDiv h1 {
-                color: #545454
-            }
-
-            /* New image gallery styles */
-            .image-gallery {
-                display: flex;
-                gap: 20px;
-                margin: 20px auto;
-                height: 650px; /* Fixed height for gallery */
-                margin-bottom: 55px;
-            }
-            .sticky-image {
-                flex: 2;
-                max-width: 50%;
-                position: relative; /* Added to allow absolute positioning of hover text */
-            }
-            .sticky-image img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                border-radius: 10px;
-            }
-            .sticky-text-hover {
-                font-family: 'Montserrat', sans-serif;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%); /* Center text */
-                z-index: 1;
-                color: #545454; /* Change color as needed */
-            }
-            .sticky-text-hover ol li {
-                margin-bottom: 10px;
-            }
-            .sticky-text-hover ol{
-                margin-bottom: 25px;
-            }
-            .small-images {
-                flex: 1;
-                display: flex;
-                flex-direction: column;
-                gap: 20px;
-                max-width: 50%;
-                height: 100%;
-            }
-            .small-images img {
-                width: 100%;
-                height: calc((100% - 20px) / 2); /* Each small image gets half the container height minus gap */
-                object-fit: cover;
-                border-radius: 10px;
-            }
-
-            /* New CSS for the status button */
-            .status-button {
-                background-color: #f8bb02;
-                border: none;
-                color: #fff;
-                padding: 10px 20px;
-                font-weight: bold;
-                font-size: 27px;
-                border-radius: 10px;
-                cursor: pointer;
-                transition: background-color 0.3s ease, transform 0.2s ease;
-                color: #525252
-            }
-            .status-button:hover {
-                background-color: #e0a802;
-                transform: scale(1.05);
-            }
-            .status-button:active {
-                transform: scale(0.98);
-            }
         </style>
     </head>
     <body>
@@ -300,68 +213,10 @@
                 <h1>Explore Our Libraries</h1>
             </div>
         </div>
+<!-- New navigation bar below the video -->
         <div class="pageSwitchNav">
-            <a href="/libraries" class="selectedNav">Libraries Built</a>
-            <a href="/nextlibrary" class="normalNav">Next Library</a>
-        </div>
-        <!-- New Google Maps Card below the navigation bar -->
-        <div class="google-map-card">
-            <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.9537353153169!3d-37.81627974202171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577d8b3c1b0b1c!2sState%20Library%20Victoria!5e0!3m2!1sen!2sau!4v1697040000000!5m2!1sen!2sau" 
-                frameborder="0" 
-                style="border:0; width:100%; height:400px;" 
-                allowfullscreen="" 
-                aria-hidden="false" 
-                tabindex="0">
-            </iframe>
-        </div>
-        <div class="centerTitleDiv">
-            <h1>Library Information</h1>
-        </div>
-        <!-- New image gallery below the Google Maps Card -->
-        <div class="image-gallery">
-            <div class="sticky-image">
-                <object data="/static/resources/sticky.svg" width="100%" height="100%"> </object>
-                <div class="sticky-text-hover">
-                    <h1>Library #1 (School Name)</h1>
-                    <ol type="1">
-                        <li>Library No.:</li>
-                        <li>Location:</li>
-                        <li>Date Of Completion:</li>
-                        <li>Students Served:</li>
-                        <li>Project Leader:</li>
-                        <li>Contact:</li>
-                        <li>Currently Need:</li>
-                    </ol>
-                    <button class="status-button">Check Current Status</button>
-                </div>
-            </div>
-            <div class="small-images">
-                <img src="/static/resources/library.jpg" alt="Small Library 1">
-                <img src="/static/resources/library.jpg" alt="Small Library 2">
-            </div>
-        </div>
-        <div class="image-gallery">
-            <div class="small-images">
-                <img src="/static/resources/library.jpg" alt="Small Library 1">
-                <img src="/static/resources/library.jpg" alt="Small Library 2">
-            </div>
-            <div class="sticky-image">
-                <object data="/static/resources/sticky.svg" width="100%" height="100%"> </object>
-                <div class="sticky-text-hover">
-                    <h1>Library #2 (School Name)</h1>
-                    <ol type="1">
-                        <li>Library No.:</li>
-                        <li>Location:</li>
-                        <li>Date Of Completion:</li>
-                        <li>Students Served:</li>
-                        <li>Project Leader:</li>
-                        <li>Contact:</li>
-                        <li>Currently Need:</li>
-                    </ol>
-                    <button class="status-button">Check Current Status</button>
-                </div>
-            </div>
+            <a href="/libraries" class="normalNav">Libraries Built</a>
+            <a href="/nextlibrary" class="selectedNav">Next Library</a>
         </div>
         <div class="footerDiv">
             <p>Contact: xxxxxx for any questions or concerns</p>
