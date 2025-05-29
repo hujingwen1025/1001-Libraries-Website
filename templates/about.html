@@ -27,7 +27,7 @@
             }
 
             body {
-                font-family: 'Slopes', sans-serif; /* Added fallback font */
+                font-family: 'Montserrat', sans-serif; /* Added fallback font */
             }
 
             /* Styles for the top menu bar */
@@ -150,13 +150,14 @@
                 padding-right: 30px;
             }
             .card-top h1 {
-                width: 30%;
+                width: 50%;
                 font-size: 40px; /* Adjusted font size */
             }
             .card-top p {
                 width: 70%;
                 text-align: justify; /* Justify text for better readability */
-                font-size: 20px; /* Adjusted font size */
+                font-size: 17px; /* Adjusted font size */
+                font-weight: normal;
             }
             .card-bottom {
                 background: linear-gradient(45deg, #7c7b7a 0%, #7c7b7a 60%, #ede8d2 60%, #ede8d2 100%);
@@ -177,7 +178,8 @@
                 order: 1; /* Move text to the left */
                 width: 70%;
                 text-align: justify; /* Justify text for better readability */
-                font-size: 20px; /* Adjusted font size */
+                font-size: 17px; /* Adjusted font size */
+                font-weight: normal;
             }
             /* Reset transform when visible */
             .card-top.visible,
@@ -373,6 +375,11 @@
             .info-description p {
                 font-size: 20px;
             }
+            .founderwords {
+                background: linear-gradient(135deg, #FFDA75, #FFDA75); /* Gradient background */
+                font-weight: normal;
+                background-color: #FFDA75;
+            }
         </style>
     </head>
     <body>
@@ -454,23 +461,17 @@
         <div class="card-container">
             <div class="card card-top">
                 <h1>What is 1001 Libraries</h1>
-                <p>Discover how 1001 Libraries is transforming communities through the power of books and education. Watch this video to see the impact of our work and how you can be a part of this journey. </p>
+                <p>1001 Libraries is an <b>international platform</b> that <b>connects under-resourced schools in need of libraries</b> with <b>student-led teams eager to make a difference in education.</b><br /><br /> The organization identifies schools lacking basic library infrastructure and publishes project information online, inviting students, especially from secondary schools, to adopt and lead these initiatives. Each library project shall be managed by a small team (3–5 students), who are responsible for fundraising (the organization can provide some start-up fund), gathering materials like books and shelves, and optionally participating in the construction process. Once the library is established, the team can continue supporting its operation, or the organization will open the project to other volunteers for further care of the library. </p>
             </div>
             <div class="card card-bottom">
                 <h1>Our Mission</h1>
-                <p>Discover how 1001 Libraries is transforming communities through the power of books and education. Watch this video to see the impact of our work and how you can be a part of this journey.  </p>
+                <p>Our mission is to make books and educational resources accessible to every child, regardless of geographical or economical restrains.<br /><br />Building a library is not just about bookshelves. It is rather about opening minds and unlocking potential for those local communities in poverty. 1001 Libraries aims to equip schools with the tools they need to foster a culture of reading and learning through the creation of sustainable, long-term, student-driven projects. With global collaborations, we envision a world where educational equity begins with access to knowledge.</p>
             </div>
         </div>
-        <div class="info-section hidden">
+        <div class="info-section hidden founderwords">
             <div class="info-description">
-                <h2>Learn More About Our Mission</h2>
-                <p>Discover how 1001 Libraries is transforming communities through the power of books and education. Watch this video to see the impact of our work and how you can be a part of this journey.</p>
-            </div>
-            <div class="info-video">
-                <video controls>
-                    <source src="/static/resources/library-theme-video.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+                <h2>Founder's Words</h2>
+                <p>hroughout my elementary school years, books have always been a place were I escape from the real world and immense my fantasies and imaginations in.<br />Years ago, a news article documenting the construction of a public library by a in a rural region in Tibet came into my sight.<br />In the spring of 2024, </p>
             </div>
         </div>
         <div class="bottomCard">
